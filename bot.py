@@ -29,6 +29,9 @@ def translate(original_text:str, to_lang:str, from_lang:str = 'auto') -> dict:
     translated_text = ts.google(original_text, from_language=from_lang, to_language=to_lang)
     return {'lang' : to_lang, 'text' : translated_text}
 
+def temp_error_handle() -> dict:
+    return {'lang' : 'ES?', 'text' : 'Error translating to this language, likely gender-specific. Please check one of the others.'}
+
 # Persist translation. Will not work across multiple instances.... Refactor.
 def store_english_translation(english_text):
     data = {
@@ -69,11 +72,13 @@ async def on_message(message):
             if not enchant.check(original_text):
                 translated_text_json = translate(original_text=original_text, to_lang='en')
             else:
-                if author in user_default_lang_map.keys():
-                    translated_text_json = translate(original_text, user_default_lang_map[author])
-                else:
-                    translated_text_json = translate(original_text=original_text, to_lang='es')
-                
+                try:
+                    if author in user_default_lang_map.keys():
+                        translated_text_json = translate(original_text, user_default_lang_map[author])
+                    else:
+                        translated_text_json = translate(original_text=original_text, to_lang='es')
+                except:
+
             translated_text = translated_text_json['text']
             lang = translated_text_json['lang'].upper()
 
