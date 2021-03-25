@@ -77,14 +77,14 @@ async def on_message(message):
         
 @client.event
 async def on_reaction_add(reaction, user):
-    print(english_translation.get_english_translation())
+    print(english_translation.english_translation())
     if str(user) != 'Translator#5638' and str(reaction.message.author) == str(client.user):
         message = reaction.message.content.strip()
         msg_tokens = message.split('-')
         _text = msg_tokens[1].strip()
         lang = msg_tokens[0].strip().lower()
 
-        translated_text_json = translate(original_text=english_translation.get_english_translation, to_lang=lang_map[str(reaction)], from_lang='en')
+        translated_text_json = translate(original_text=english_translation.english_translation, to_lang=lang_map[str(reaction)], from_lang='en')
 
         translated_text = translated_text_json['text']
         lang = translated_text_json['lang'].upper()
