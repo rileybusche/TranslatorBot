@@ -25,7 +25,7 @@ user_default_lang_map = {
     'LiquidLuck#9488'   : 'es'
 }
 
-english_translation = ''
+global english_translation = ''
 
 def translate(original_text:str, to_lang:str, from_lang:str = 'auto') -> dict:
     translated_text = ts.google(original_text, from_language=from_lang, to_language=to_lang)
