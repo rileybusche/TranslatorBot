@@ -49,6 +49,8 @@ async def on_message(message):
     if msg_tokens[0] == '!ts':
         original_text = msg[len(msg_tokens)+1:]
 
+        english_translation = translate(original_text=original_text, to_lang='en')['text']
+
         if not enchant.check(original_text):
             translated_text_json = translate(original_text=original_text, to_lang='en')
         else:
@@ -67,10 +69,10 @@ async def on_reaction_add(reaction, user):
     if str(user) != 'Translator#5638' and str(reaction.message.author) == str(client.user):
         message = reaction.message.content.strip()
         msg_tokens = message.split('-')
-        text = msg_tokens[1].strip()
+        _text = msg_tokens[1].strip()
         lang = msg_tokens[0].strip().lower()
 
-        translated_text_json = translate(original_text=english_translation, to_lang=lang_map[str(reaction)], from_lang=lang)
+        translated_text_json = translate(original_text=english_translation, to_lang=lang_map[str(reaction)], from_lang='en')
 
         translated_text = translated_text_json['text']
         lang = translated_text_json['lang'].upper()
