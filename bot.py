@@ -52,11 +52,15 @@ async def on_message(message):
         await message.add_reaction('🇯🇵')
         await message.add_reaction('🇺🇸')
         return
-    
+
+    # Delete Error Message
+    if message.content == 'Please include a word after \'!ts\'.':
+        await message.delete(delay=3)
+
     if msg_tokens[0] == '!ts':
 
         if len(msg_tokens) == 1:
-            await channel.send("Please include a word after \'!ts\'.").delete(delay=3)
+            await channel.send("Please include a word after \'!ts\'.")
         else:
             original_text = msg[len(msg_tokens)+1:]
 
