@@ -54,22 +54,26 @@ async def on_message(message):
         return
     
     if msg_tokens[0] == '!ts':
-        original_text = msg[len(msg_tokens)+1:]
 
-        store_english_translation(translate(original_text=original_text, to_lang='en')['text']) 
-
-        if not enchant.check(original_text):
-            translated_text_json = translate(original_text=original_text, to_lang='en')
+        if len(msg_tokens) == 1:
+            await channel.send("Please include a word after \'!ts\'.")
         else:
-            if author in user_default_lang_map.keys():
-                translated_text_json = translate(original_text, user_default_lang_map[author])
-            else:
-                translated_text_json = translate(original_text=original_text, to_lang='es')
-            
-        translated_text = translated_text_json['text']
-        lang = translated_text_json['lang'].upper()
+            original_text = msg[len(msg_tokens)+1:]
 
-        await channel.send(f"{lang} - {translated_text}")
+            store_english_translation(translate(original_text=original_text, to_lang='en')['text']) 
+
+            if not enchant.check(original_text):
+                translated_text_json = translate(original_text=original_text, to_lang='en')
+            else:
+                if author in user_default_lang_map.keys():
+                    translated_text_json = translate(original_text, user_default_lang_map[author])
+                else:
+                    translated_text_json = translate(original_text=original_text, to_lang='es')
+                
+            translated_text = translated_text_json['text']
+            lang = translated_text_json['lang'].upper()
+
+            await channel.send(f"{lang} - {translated_text}")
         
 @client.event
 async def on_reaction_add(reaction, user):
