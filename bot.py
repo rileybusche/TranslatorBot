@@ -55,7 +55,7 @@ async def on_message(message):
 
     # Delete Error Message
     if message.content == 'Please include a word after \'!ts\'.':
-        await message.delete(delay=3)
+        await message.delete(delay=5)
 
     if msg_tokens[0] == '!ts':
 
