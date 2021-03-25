@@ -56,7 +56,7 @@ async def on_message(message):
     if msg_tokens[0] == '!ts':
 
         if len(msg_tokens) == 1:
-            await channel.send("Please include a word after \'!ts\'.")
+            await channel.send("Please include a word after \'!ts\'.").delete(delay=3)
         else:
             original_text = msg[len(msg_tokens)+1:]
 
