@@ -46,7 +46,7 @@ async def on_message(message):
     msg =  message.content.strip().lower()
     msg_tokens = msg.split()
 
-    if author == str(client.user):
+    if author == str(client.user) and message.content != 'Please include a word after \'!ts\'.':
         await message.add_reaction('🇪🇸')
         await message.add_reaction('🇨🇳')
         await message.add_reaction('🇯🇵')
