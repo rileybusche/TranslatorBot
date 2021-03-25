@@ -80,7 +80,7 @@ async def on_reaction_add(reaction, user):
         lang = msg_tokens[0].strip().lower()
 
         english_text = ''
-        with open('data.json') as json_file:
+        with open('english_translation.json') as json_file:
             data = json.load(json_file)
             english_text = data['english_translation']
         json_file.close()
