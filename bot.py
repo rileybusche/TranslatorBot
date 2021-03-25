@@ -29,6 +29,7 @@ user_default_lang_map = {
 class English_translation:
     def __init__(self, english_translation):
         self.english_translation = english_translation
+        print(self.english_translation)
     def get_english_translation(self):
         return self.english_translation
     def set_english_translation(self, english_translation):
