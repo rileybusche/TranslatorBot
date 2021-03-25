@@ -84,6 +84,9 @@ async def on_message(message):
             lang = translated_text_json['lang'].upper()
 
             await channel.send(f"{lang} - {translated_text}")
+    
+    if msg == '!translator_close' and author == bot_owner:
+        await client.close()
         
 @client.event
 async def on_reaction_add(reaction, user):
@@ -103,7 +106,7 @@ async def on_reaction_add(reaction, user):
             translated_text_json = translate(original_text=english_text, to_lang=lang_map[str(reaction)], from_lang='en')
         except:
             translated_text_json = temp_error_handle()
-            
+
         translated_text = translated_text_json['text']
         lang = translated_text_json['lang'].upper()
         message = f"{lang} - {translated_text}"
