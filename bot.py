@@ -27,6 +27,7 @@ user_default_lang_map = {
 
 # Using this to store the original Enligsh Translation
 class English_translation:
+    english_translation = ''
     def __init__(self, english_translation):
         self.english_translation = english_translation
         print(self.english_translation)
