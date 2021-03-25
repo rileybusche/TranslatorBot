@@ -24,7 +24,18 @@ user_default_lang_map = {
     'TheDenzel#2847'    : 'ja',
     'LiquidLuck#9488'   : 'es'
 }
-english_translation = 'hello'
+
+# Using this to store the original Enligsh Translation
+class English_translation:
+    def __init__(self, english_translation):
+        self.english_translation = english_translation
+    def get_english_translation(self):
+        return self.english_translation
+    def set_english_translation(self, english_translation):
+        self.english_translation = english_translation
+
+english_translation = English_translation('')
+
 
 def translate(original_text:str, to_lang:str, from_lang:str = 'auto') -> dict:
     translated_text = ts.google(original_text, from_language=from_lang, to_language=to_lang)
@@ -48,7 +59,7 @@ async def on_message(message):
     if msg_tokens[0] == '!ts':
         original_text = msg[len(msg_tokens)+1:]
 
-        english_translation = translate(original_text=original_text, to_lang='en')['text']
+        english_translation.set_english_translation = translate(original_text=original_text, to_lang='en')['text']
 
         if not enchant.check(original_text):
             translated_text_json = translate(original_text=original_text, to_lang='en')
@@ -65,14 +76,14 @@ async def on_message(message):
         
 @client.event
 async def on_reaction_add(reaction, user):
-    print(english_translation)
+    print(english_translation.get_english_translation())
     if str(user) != 'Translator#5638' and str(reaction.message.author) == str(client.user):
         message = reaction.message.content.strip()
         msg_tokens = message.split('-')
         _text = msg_tokens[1].strip()
         lang = msg_tokens[0].strip().lower()
 
-        translated_text_json = translate(original_text=english_translation, to_lang=lang_map[str(reaction)], from_lang='en')
+        translated_text_json = translate(original_text=english_translation.get_english_translation, to_lang=lang_map[str(reaction)], from_lang='en')
 
         translated_text = translated_text_json['text']
         lang = translated_text_json['lang'].upper()
