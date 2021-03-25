@@ -99,8 +99,11 @@ async def on_reaction_add(reaction, user):
             english_text = data['english_translation']
         json_file.close()
 
-        translated_text_json = translate(original_text=english_text, to_lang=lang_map[str(reaction)], from_lang='en')
-
+        try:
+            translated_text_json = translate(original_text=english_text, to_lang=lang_map[str(reaction)], from_lang='en')
+        except:
+            translated_text_json = temp_error_handle()
+            
         translated_text = translated_text_json['text']
         lang = translated_text_json['lang'].upper()
         message = f"{lang} - {translated_text}"
