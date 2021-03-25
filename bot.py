@@ -78,6 +78,7 @@ async def on_message(message):
                     else:
                         translated_text_json = translate(original_text=original_text, to_lang='es')
                 except:
+                    translated_text_json = temp_error_handle()
 
             translated_text = translated_text_json['text']
             lang = translated_text_json['lang'].upper()
