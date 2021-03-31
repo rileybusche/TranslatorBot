@@ -18,7 +18,8 @@ lang_map = {
     '🇪🇸' : 'es',
     '🇨🇳' : 'zh',
     '🇯🇵' : 'ja',
-    '🇺🇸' : 'en'
+    '🇺🇸' : 'en',
+    '🇮🇹' : 'it'
 }
 user_default_lang_map = {
     'TheDenzel#2847'    : 'ja',
@@ -44,8 +45,6 @@ def store_english_translation(english_text):
 @client.event
 async def on_message(message):
 
-    print(message.content)
-
     author = str(message.author)
     channel = message.channel
     msg =  message.content.strip().lower()
@@ -56,6 +55,7 @@ async def on_message(message):
         await message.add_reaction('🇨🇳')
         await message.add_reaction('🇯🇵')
         await message.add_reaction('🇺🇸')
+        await message.add_reaction('🇮🇹')
         return
 
     # Delete Error Message
