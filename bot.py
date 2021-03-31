@@ -44,6 +44,8 @@ def store_english_translation(english_text):
 @client.event
 async def on_message(message):
 
+    print(message.content)
+
     author = str(message.author)
     channel = message.channel
     msg =  message.content.strip().lower()
