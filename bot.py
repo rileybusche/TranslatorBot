@@ -19,11 +19,13 @@ lang_map = {
     '🇨🇳' : 'zh',
     '🇯🇵' : 'ja',
     '🇺🇸' : 'en',
-    '🇮🇹' : 'it'
+    '🇮🇹' : 'it',
+    '🇰🇷' : 'ko'
 }
 user_default_lang_map = {
     'TheDenzel#2847'    : 'ja',
-    'LiquidLuck#9488'   : 'es'
+    'LiquidLuck#9488'   : 'es',
+    'McNuggetMan#5562'  : 'ko'
 }
 
 def translate(original_text:str, to_lang:str, from_lang:str = 'auto') -> dict:
@@ -57,6 +59,7 @@ async def on_message(message):
         await message.add_reaction('🇯🇵')
         await message.add_reaction('🇺🇸')
         await message.add_reaction('🇮🇹')
+        await message.add_reaction('🇰🇷')
         return
 
     # Delete Error Message
